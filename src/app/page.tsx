@@ -43,6 +43,7 @@ export default function Home() {
     const [submittedQuery, setSubmittedQuery] = useState("");
     const [response, setResponse] = useState<ChatResponse | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isInfoOpen, setIsInfoOpen] = useState(false);
     const examples = [
         "What is the expense ratio of Groww Liquid Fund?",
         "What is the lock-in period of Groww ELSS Tax Saver Fund?",
@@ -125,18 +126,44 @@ export default function Home() {
                     </button>
 
                     <div className="p-4 bg-white dark:bg-[#252a33] rounded-2xl border border-[#eff2f5] dark:border-[#2d323b] shadow-sm">
-                        <h3 className="text-[11px] font-bold text-[#00d09c] uppercase tracking-widest mb-2 flex items-center gap-2">
-                            <Info size={14} /> Core Policy
+                        <h3 className="text-[11px] font-bold text-[#00d09c] uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <CheckCircle2 size={14} /> Project Scope
                         </h3>
-                        <p className="text-xs text-[#7c8db5] leading-relaxed">
-                            This engine provides <strong className="text-[#1c1c1c] dark:text-[#eef1f5]">Factual Data</strong> extracted from official records. We do not provide financial advice or recommendations.
-                        </p>
+                        <ul className="text-[10px] text-[#7c8db5] space-y-2 font-medium">
+                            <li className="flex items-start gap-2">
+                                <div className="w-1 h-1 rounded-full bg-[#00d09c] mt-1 shrink-0" />
+                                <span>Specific Coverage: Liquid, Index & ELSS funds.</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <div className="w-1 h-1 rounded-full bg-[#00d09c] mt-1 shrink-0" />
+                                <span>Fact Retrieval: NAV, Expense Ratio, Lock-in & Exit Load.</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <div className="pt-4 border-t border-[#eff2f5] dark:border-[#2d323b] flex flex-col gap-2">
+                    <div className="p-4 bg-amber-50/50 dark:bg-amber-950/10 rounded-2xl border border-amber-100/50 dark:border-amber-900/20">
+                        <h3 className="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <AlertTriangle size={14} /> Limitations
+                        </h3>
+                        <ul className="text-[10px] text-amber-800/70 dark:text-amber-200/50 space-y-2 font-medium">
+                            <li className="flex items-start gap-2">
+                                <span className="text-amber-500">•</span>
+                                <span>No Investment Advice or personalized recommendations.</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <span className="text-amber-500">•</span>
+                                <span>Historical data only; no future projections.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#eff2f5] dark:border-[#2d323b] flex flex-col gap-2 text-center lg:text-left">
                         <p className="text-[10px] font-bold text-[#7c8db5] uppercase tracking-wider mb-2">Helpful Links</p>
-                        <a href="https://groww.in" target="_blank" className="text-xs text-[#7c8db5] hover:text-[#00d09c] flex items-center gap-2 transition-all">
-                            <ExternalLink size={12} /> Groww Official
+                        <a href="https://groww.in/mutual-funds" target="_blank" className="text-xs text-[#7c8db5] hover:text-[#00d09c] flex items-center gap-2 transition-all">
+                            <ExternalLink size={12} /> Mutual Fund Explorer
+                        </a>
+                        <a href="https://groww.in/blog" target="_blank" className="text-xs text-[#7c8db5] hover:text-[#00d09c] flex items-center gap-2 transition-all">
+                            <ExternalLink size={12} /> Education Blog
                         </a>
                     </div>
                 </div>
@@ -163,7 +190,9 @@ export default function Home() {
                         <button onClick={handleNewChat} className="p-2 text-[#00d09c] hover:bg-[#00d09c]/10 rounded-lg">
                             <Plus size={20} />
                         </button>
-                        <Info size={18} className="text-[#00d09c]" />
+                        <button onClick={() => setIsInfoOpen(true)} className="p-2 text-[#00d09c] hover:bg-[#00d09c]/10 rounded-lg transition-colors">
+                            <Info size={18} />
+                        </button>
                     </div>
                 </div>
 
@@ -284,6 +313,53 @@ export default function Home() {
                         Factual data assistant. Not an investment platform or advisory service.
                     </p>
                 </div>
+
+                {/* Scope & Limitations Modal (Mobile Only) */}
+                {isInfoOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+                        <div className="bg-white dark:bg-[#1a1d23] w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl border border-[#eff2f5] dark:border-[#2d323b] animate-in zoom-in-95 duration-300">
+                            <div className="p-6 border-b border-[#eff2f5] dark:border-[#2d323b] flex items-center justify-between">
+                                <h2 className="font-extrabold text-[#1c1c1c] dark:text-[#eef1f5]">Intelligence Guide</h2>
+                                <button
+                                    onClick={() => setIsInfoOpen(false)}
+                                    className="p-1 hover:bg-[#f7f9fb] dark:hover:bg-[#252a33] rounded-lg transition-colors text-[#7c8db5]"
+                                >
+                                    <Plus className="rotate-45" size={20} />
+                                </button>
+                            </div>
+                            <div className="p-6 space-y-6">
+                                <div>
+                                    <h3 className="text-[11px] font-bold text-[#00d09c] uppercase tracking-widest mb-3 flex items-center gap-2">
+                                        <CheckCircle2 size={14} /> Project Scope
+                                    </h3>
+                                    <ul className="text-xs text-[#7c8db5] space-y-2 font-medium">
+                                        <li>• Specific Coverage: Liquid, Index & ELSS funds.</li>
+                                        <li>• Fact Retrieval: NAV, Expense Ratio, Lock-in & Exit Load.</li>
+                                        <li>• Citation Mapping: Tied to official documentation.</li>
+                                    </ul>
+                                </div>
+                                <div className="p-4 bg-amber-50 dark:bg-amber-950/10 rounded-2xl border border-amber-100 dark:border-amber-900/20">
+                                    <h3 className="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                        <AlertTriangle size={14} /> Limitations
+                                    </h3>
+                                    <ul className="text-xs text-amber-800/70 dark:text-amber-200/50 space-y-2 font-medium">
+                                        <li>• No Investment Advice or recommendations.</li>
+                                        <li>• Historical data only; no performance forecasts.</li>
+                                        <li>• Strictly factual, document-grounded responses.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="p-6 bg-[#f7f9fb] dark:bg-[#252a33] flex justify-center">
+                                <button
+                                    onClick={() => setIsInfoOpen(false)}
+                                    className="px-8 py-2.5 bg-[#1c1c1c] dark:bg-white text-white dark:text-[#1c1c1c] rounded-xl font-bold text-xs transition-transform active:scale-95"
+                                >
+                                    Got it
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </main>
         </div>
     );
