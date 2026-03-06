@@ -54,9 +54,24 @@ function expandQuery(word: string): string[] {
  */
 function loadChunks(): Chunk[] {
     try {
-        const dataDir = path.join(process.cwd(), "data", "raw");
-        if (!fs.existsSync(dataDir)) {
-            console.warn("[RAG] data/raw directory not found.");
+        const possiblePaths = [
+            path.join(process.cwd(), "src", "data", "raw"),
+            path.join(process.cwd(), "data", "raw"),
+        ];
+
+        let dataDir = possiblePaths[0];
+        let found = false;
+
+        for (const p of possiblePaths) {
+            if (fs.existsSync(p)) {
+                dataDir = p;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            console.error(`[RAG_ERROR] Knowledge base not found. Searched: ${possiblePaths.join(", ")}`);
             return [];
         }
 

@@ -13,13 +13,9 @@ const SOURCE_URLS: Record<string, { label: string; url: string }> = {
 const AMFI_LINK = "https://www.amfiindia.com/investor-corner/knowledge-center/how-to-invest.html";
 
 function logInternal(data: any) {
-    try {
-        const logPath = path.join(process.cwd(), "chat_internal.log");
-        const logEntry = `[${new Date().toISOString()}] ${JSON.stringify(data)}\n`;
-        fs.appendFileSync(logPath, logEntry);
-    } catch (e) {
-        console.error("Logging failed", e);
-    }
+    // On Vercel, the root filesystem is read-only. 
+    // We'll use console logging which Vercel captures effectively.
+    console.log(`[INTERNAL_LOG] ${JSON.stringify(data)}`);
 }
 
 export async function POST(req: NextRequest) {
@@ -110,10 +106,11 @@ ${context}`
         });
 
     } catch (error: any) {
-        logInternal({ error: error.message });
+        logInternal({ error: error.message, stack: error.stack });
+        const isApiKeyMissing = !process.env.GROQ_API_KEY;
         return NextResponse.json({
             type: "ERROR",
-            reply: "I could not find this information in official sources.",
+            reply: `System busy or configuration missing. ${isApiKeyMissing ? '(API Key Error)' : ''}`,
             citation: null,
             updatedAt: null
         }, { status: 500 });
