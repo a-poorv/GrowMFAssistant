@@ -127,7 +127,7 @@ export default function Home() {
 
                     <div className="p-4 bg-white dark:bg-[#252a33] rounded-2xl border border-[#eff2f5] dark:border-[#2d323b] shadow-sm">
                         <h3 className="text-[11px] font-bold text-[#00d09c] uppercase tracking-widest mb-3 flex items-center gap-2">
-                            <CheckCircle2 size={14} /> Project Scope
+                            <CheckCircle2 size={14} /> Bot Capabilities
                         </h3>
                         <ul className="text-[10px] text-[#7c8db5] space-y-2 font-medium">
                             <li className="flex items-start gap-2">
@@ -330,7 +330,7 @@ export default function Home() {
                             <div className="p-6 space-y-6">
                                 <div>
                                     <h3 className="text-[11px] font-bold text-[#00d09c] uppercase tracking-widest mb-3 flex items-center gap-2">
-                                        <CheckCircle2 size={14} /> Project Scope
+                                        <CheckCircle2 size={14} /> Bot Capabilities
                                     </h3>
                                     <ul className="text-xs text-[#7c8db5] space-y-2 font-medium">
                                         <li>• Specific Coverage: Liquid, Index & ELSS funds.</li>
