@@ -1,43 +1,76 @@
-# Groww MF FAQ Bot (RAG)
+# 🚀 Groww MF Assistant (RAG Chatbot)
 
-A high-context aware chatbot built with Next.js, LangChain.js, and Google Gemini to answer questions about Groww Mutual Funds.
+A premium, fintech-grade **Factual Data Assistant** built with Next.js 15+, Tailwind CSS, and the **Groq Llama-3.3-70b** model for precise mutual fund retrieval (RAG).
 
-## 🚀 Features
-- **RAG (Retrieval-Augmented Generation)**: Answers questions based on real-time data from 3 Groww MF schemes.
-- **Premium UI**: Clean, mobile-responsive chat interface with Groww branding.
-- **Context Awareness**: Accurately retrieves details like Expense Ratio, Exit Load, and Risk levels.
+> [!IMPORTANT]
+> **Factual Only Policy**: This assistant is grounded to official documentation and is prohibited from giving investment advice or personalized recommendations.
 
-## 🛠 Setup
+---
+
+## 🏗️ Project Setup
 
 ### 1. Prerequisites
-- Node.js 18+ installed.
-- A **Google Generative AI API Key** (Gemini).
+- **Node.js**: 20.x or higher
+- **Groq API Key**: [Get one for free at Groq Console](https://console.groq.com/keys)
+- **Vercel CLI**: (Optional, for deployment)
 
-### 2. Configuration
-Create a `.env.local` file in the root directory (if not already present) and add your API key:
-```env
-GOOGLE_GENERATIVE_AI_API_KEY=your_actual_api_key_here
-```
-
-### 3. Installation
+### 2. Installation
 ```bash
-npm install --legacy-peer-deps
+git clone https://github.com/a-poorv/GrowMFAssistant.git
+cd GrowMFAssistant
+npm install
 ```
 
-### 4. Running the App
+### 3. Environment Variables
+Create a `.env.local` file in the root:
+```env
+GROQ_API_KEY=your_actual_groq_api_key_here
+```
+
+### 4. Running Locally
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Visit [http://localhost:3000](http://localhost:3000).
 
-## 📂 Project Structure
-- `data/raw/`: Contains the scraped text files for the funds.
-- `src/app/api/chat/`: The main RAG logic and LLM interaction.
-- `src/lib/rag-utils.ts`: Utility for chunking and vector storage (Memory-based).
-- `src/app/page.tsx`: The main chat interface.
+---
 
-## 📝 Data Source
-Information for the following funds is included:
-- Groww Nifty Total Market Index Fund
-- Groww ELSS Tax Saver Fund
-- Groww Liquid Fund
+## 🎯 Bot Capabilities & Scope
+
+### 🏢 Asset Management Company (AMC)
+- **Primary Focus**: [Groww Mutual Fund](https://growwmf.in/)
+
+### 📝 Supported Schemes (Scoped)
+The assistant is currently grounded in the documentation for the following funds:
+- **Groww Liquid Fund** (Debt)
+- **Groww Nifty Total Market Index Fund** (Equity - Index)
+- **Groww ELSS Tax Saver Fund** (Equity - ELSS)
+- **Groww Large Cap Fund** (Equity - Large Cap)
+
+### 🔍 Fact Retrieval Features
+- **NAV Details**: Historical and latest Net Asset Value (static/scraped).
+- **Expense Ratios**: Direct Growth plan costs.
+- **Lock-in Periods**: Specifics like the 3-year ELSS requirement.
+- **Exit Loads**: Tiered structures based on holding duration.
+- **Top Holdings**: Major companies/assets within the schemes.
+
+---
+
+## 🚫 Known Limitations & Constraints
+
+1. **No Predictive Data**: It cannot forecast future returns or rank funds.
+2. **Advisory Refusal**: Any query asking for "advice," "recommendations," or "comparisons" will trigger an automatic disclaimer.
+3. **Data Freshness**: The assistant relies on periodic text-based scraping. For live transaction data, please use [Groww.in](https://groww.in/).
+4. **Offline Mode**: The RAG engine (TF-IDF based) caches data locally and does not require an external vector database.
+
+---
+
+## 📄 Documentation Links
+- [Factual Knowledge Sources](./SOURCES.md)
+- [Sample Q&A Examples](./SAMPLE_QUERIES.md)
+- [Technical Architecture](./ARCHITECTURE.md)
+
+---
+
+## ⚖️ Disclaimer
+This is for educational and informational purposes only. Mutual Fund investments are subject to market risks, read all scheme-related documents carefully.
